@@ -4,7 +4,6 @@ public class FlyNoWay implements FlyBehavior {
 
     @Override
     public void fly() {
-        //날 수 없음
-        //아무 것도 하지 않음
+        System.out.println("저는 날 수 없어요.");
     }
 }
