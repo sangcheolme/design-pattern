@@ -1,4 +1,4 @@
-package observer;
+package observer.weather;
 
 /**
  * 옵저버 인터페이스
