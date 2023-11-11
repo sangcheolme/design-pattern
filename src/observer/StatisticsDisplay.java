@@ -1,19 +1,38 @@
 package observer;
 
-public class StatisticsDisplay implements Display {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-    private String name = "statisticsDisplay";
+public class StatisticsDisplay implements Display, DisplayElement {
 
-    @Override
-    public String getName() {
-        return name;
+    private float temperature;
+    private List<Float> temperatures;
+    private WeatherData weatherData;
+
+    private float averageTemp;
+    private float maxTemp;
+    private float minTemp;
+
+    public StatisticsDisplay(WeatherData weatherData) {
+        this.weatherData = weatherData;
+        temperatures = new ArrayList<>();
+        weatherData.registerObserver(this);
     }
 
     @Override
-    public void update(float temp, float humidity, float pressure) {
-        System.out.println("기상 통계");
-        System.out.println("온도: " + temp + " 습도: " + humidity + " 압력: " + pressure);
+    public void update(float temperature, float humidity, float pressure) {
+        temperatures.add(temperature);
+        this.temperature = temperature;
+        this.averageTemp = temperatures.stream().reduce(Float::sum).get() / temperatures.size();
+        this.minTemp = Collections.min(temperatures);
+        this.maxTemp = Collections.max(temperatures);
+        display();
+    }
 
-        System.out.println();
+    @Override
+    public void display() {
+        System.out.println("평균/최고/최저 온도 = " + averageTemp + "/" +
+                 maxTemp + "/" + minTemp);
     }
 }

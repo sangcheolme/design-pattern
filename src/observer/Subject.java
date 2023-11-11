@@ -4,7 +4,7 @@ public interface Subject {
 
     void registerObserver(Display display);
 
-    void removeObserver(String name);
+    void removeObserver(Display display);
 
     void notifyObservers();
 }

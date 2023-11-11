@@ -1,18 +1,31 @@
 package observer;
 
-public class ForecastDisplay implements Display {
+public class ForecastDisplay implements Display, DisplayElement {
 
-    private String name = "forecastDisplay";
+    private float currentPressure = 29.92f;
+    private float lastPressure;
+    private WeatherData weatherData;
 
-    @Override
-    public String getName() {
-        return name;
+    public ForecastDisplay(WeatherData weatherData) {
+        this.weatherData = weatherData;
+        weatherData.registerObserver(this);
     }
 
     @Override
-    public void update(float temp, float humidity, float pressure) {
-        System.out.println("기상 예보");
-        System.out.println("온도: " + temp + " 습도: " + humidity + " 압력: " + pressure);
-        System.out.println();
+    public void update(float temperature, float humidity, float pressure) {
+        lastPressure = currentPressure;
+        currentPressure = pressure;
+        display();
+    }
+
+    public void display() {
+        System.out.print("기상 예보: ");
+        if (currentPressure > lastPressure) {
+            System.out.println("날씨가 좋아지고 있습니다!");
+        } else if (currentPressure == lastPressure) {
+            System.out.println("지금과 비슷할 것 같습니다.");
+        } else if (currentPressure < lastPressure) {
+            System.out.println("쌀쌀하며 비가 올 것 같습니다.");
+        }
     }
 }

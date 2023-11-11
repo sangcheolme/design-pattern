@@ -1,8 +1,9 @@
 package observer;
 
+/**
+ * 옵저버 인터페이스
+ */
 public interface Display {
 
-    void update(float temp, float humidity, float pressure);
-
-    String getName();
+    void update(float temperature, float humidity, float pressure);
 }
