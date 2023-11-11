@@ -1,6 +1,5 @@
 package simUduck;
 
-public interface Quackable {
-
+public interface QuackBehavior {
     void quack();
 }

@@ -1,6 +1,5 @@
 package simUduck;
 
-public interface Flyable {
-
+public interface FlyBehavior {
     void fly();
 }
